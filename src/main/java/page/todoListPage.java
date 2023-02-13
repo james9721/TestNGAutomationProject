@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 public class todoListPage extends BasePage {
 	WebDriver driver;
@@ -43,21 +44,18 @@ public class todoListPage extends BasePage {
 		
 	}
 	public void validateMonth() {
-		String[] months = {"Ja1n","Feb","Mar", "Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+		String[] months = {"None","Jan","Feb","Mar", "Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 		Select sel = new Select(monthDropDown);
 		List<WebElement> selectedOptions = sel.getOptions();
-		for(WebElement options: selectedOptions) {
+		
 			for(int i = 0; i<months.length; i++) {
-				if (options.getText().equals(months[i])) {
-					System.out.println("Months are matched!" );
-				}
-				else {
-					System.out.println("Months do not match");
-					break;
-				}
+
+				System.out.println(selectedOptions.get(i).getText() + "-->" + months[i]);
+				Assert.assertEquals(selectedOptions.get(i).getText(), months[i]);
+				
 			}
 		}
 
 	}
 
-}
+
